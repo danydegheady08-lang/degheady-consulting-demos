@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Sales Assistant — Degheady Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0c0a;
+    --bg-2: #141412;
+    --bg-3: #1c1c19;
+    --bg-4: #242420;
+    --amber: #f0a500;
+    --amber-dim: #b87d00;
+    --amber-glow: rgba(240,165,0,0.08);
+    --amber-border: rgba(240,165,0,0.2);
+    --text: #e8e2d0;
+    --text-dim: #8a8478;
+    --text-muted: #3a3830;
+    --green: #4caf7d;
+    --green-bg: rgba(76,175,125,0.08);
+    --green-border: rgba(76,175,125,0.25);
+    --white: #f4ede0;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Top bar */
+  .topbar {
+    border-bottom: 1px solid var(--amber-border);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+  }
+
+  .topbar-tag {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--green);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Layout */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title span {
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .stat {
+    background: var(--bg-2);
+    padding: 20px 24px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--amber);
+    font-family: 'JetBrains Mono', monospace;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* Main grid */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Panel */
+  .panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+  }
+
+  .panel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .panel-badge {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    background: var(--amber-glow);
+    border: 1px solid var(--amber-border);
+    padding: 2px 8px;
+  }
+
+  .panel-body {
+    padding: 20px;
+  }
+
+  /* Textarea */
+  textarea {
+    width: 100%;
+    background: var(--bg-3);
+    border: 1px solid var(--text-muted);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 16px;
+    resize: vertical;
+    min-height: 280px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus {
+    border-color: var(--amber);
+  }
+
+  textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Button */
+  .btn-primary {
+    width: 100%;
+    background: var(--amber);
+    color: #0c0c0a;
+    border: none;
+    padding: 14px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    margin-top: 12px;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover { background: #d4920a; }
+  .btn-primary:active { transform: scale(0.99); }
+  .btn-primary:disabled {
+    background: var(--text-muted);
+    color: var(--text-dim);
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: none;
+    border: 1px solid var(--text-muted);
+    color: var(--text-dim);
+    padding: 7px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* Output area */
+  .output-full {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .output-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .output-section {
+    background: var(--bg-2);
+    padding: 24px;
+  }
+
+  .output-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .output-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--amber-border);
+  }
+
+  .output-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .output-text.placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Loading */
+  .loading {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 24px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .loading.active { display: flex; }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--text-muted);
+    border-top-color: var(--amber);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Success state */
+  .output-success {
+    display: none;
+  }
+
+  .output-success.active {
+    display: block;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--text-muted);
+    color: var(--text-dim);
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.15s;
+    margin-top: 12px;
+  }
+
+  .copy-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* Example notes */
+  .example-strip {
+    background: var(--bg-3);
+    border: 1px solid var(--text-muted);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .example-strip:hover { border-color: var(--amber); }
+
+  .example-icon {
+    color: var(--amber);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .example-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .example-label {
+    font-size: 10px;
+    color: var(--amber);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  /* Error */
+  .error-box {
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.3);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #e74c3c;
+    display: none;
+    margin-top: 12px;
+  }
+
+  .error-box.active { display: block; }
+
+  /* Time badge */
+  .time-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    padding: 3px 10px;
+    display: none;
+  }
+
+  .time-badge.active { display: inline-block; }
+
+  /* How it works */
+  .how-it-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 32px;
+  }
+
+  .step {
+    background: var(--bg-2);
+    padding: 24px;
+  }
+
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--amber);
+    opacity: 0.4;
+    margin-bottom: 10px;
+  }
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .main-grid, .output-grid, .how-it-works, .stats { grid-template-columns: 1fr; }
+    .container { padding: 24px 16px; }
+    .hero-title { font-size: 26px; }
+    .topbar { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="topbar-brand">DEGHEADY CONSULTING</div>
+    <div class="topbar-tag">AI SALES ASSISTANT — LIVE DEMO</div>
+  </div>
+  <div class="status-pill">
+    <span class="status-dot"></span>
+    SYSTEM LIVE
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Powered by Claude AI</div>
+    <div class="hero-title">Your post-call notes.<br><span>Professional output. Under a minute.</span></div>
+    <div class="hero-sub">Paste rough notes from any sales call. Get a ready-to-send follow-up email and a complete CRM summary. No editing required.</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">&lt;60s</span>
+      <div class="stat-label">Average processing time</div>
+    </div>
+    <div class="stat">
+      <span class="stat-value">2</span>
+      <div class="stat-label">Outputs per call</div>
+    </div>
+    <div class="stat">
+      <span class="stat-value">~45min</span>
+      <div class="stat-label">Saved per rep per day</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Your Call Notes</span>
+        <span class="panel-badge">INPUT</span>
+      </div>
+      <div class="panel-body">
+        <div class="example-strip" onclick="loadExample()">
+          <span class="example-icon">▶</span>
+          <div>
+            <div class="example-label">LOAD EXAMPLE</div>
+            <div class="example-text">Click to load a sample sales call scenario and see the tool in action</div>
+          </div>
+        </div>
+        <textarea id="notesInput" placeholder="Paste your rough post-call notes here. Anything works — bullet points, stream of consciousness, voice memo transcript. The messier the better.
+
+Example:
+- Called Marcus at FreightBridge
+- Pain: 3-4 hrs daily per coordinator on manual dispatch admin
+- 6 coordinators total
+- Concerned about Q3 implementation timing
+- Next call June 9th, wants Stefan and Burkhard on the call
+- Budget seems fine around 8-12k range"></textarea>
+        <button class="btn-primary" onclick="generateOutput()" id="generateBtn">
+          <span id="btnText">Generate Follow-Up + CRM Summary</span>
+        </button>
+        <div class="error-box" id="errorBox"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">What Gets Generated</span>
+        <span class="panel-badge">PREVIEW</span>
+      </div>
+      <div class="panel-body" style="padding: 16px;">
+        <div style="margin-bottom: 12px;">
+          <div style="font-size: 11px; color: var(--amber); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; margin-bottom: 8px;">01 — FOLLOW-UP EMAIL</div>
+          <div style="font-size: 12px; color: var(--text-dim); line-height: 1.7; background: var(--bg-3); padding: 12px; border-left: 2px solid var(--amber);">
+            A professional, ready-to-send email to the prospect. Personalized to what was discussed. References their specific pain points and confirms next steps. Sounds like a senior sales rep wrote it.
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--amber); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; margin-bottom: 8px;">02 — CRM DEAL SUMMARY</div>
+          <div style="font-size: 12px; color: var(--text-dim); line-height: 1.7; background: var(--bg-3); padding: 12px; border-left: 2px solid var(--amber);">
+            A structured deal record: contact details, deal stage, close probability, estimated value, pain points captured, objections noted, and exact next steps. Ready to paste into any CRM.
+          </div>
+        </div>
+        <div style="margin-top: 16px; padding: 12px; background: var(--amber-glow); border: 1px solid var(--amber-border);">
+          <div style="font-size: 11px; color: var(--amber); font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">WHY THIS MATTERS</div>
+          <div style="font-size: 12px; color: var(--text-dim); line-height: 1.6;">Sales reps currently spend 30 to 60 minutes on this after every call. Multiplied across a team of 5, that's 2.5 to 5 hours of selling time lost daily to admin.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading" id="loadingState">
+    <div class="spinner"></div>
+    <span>Processing your call notes...</span>
+  </div>
+
+  <!-- Output -->
+  <div class="output-success" id="outputSuccess">
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--bg-2); border: 1px solid var(--border); border-bottom: none; margin-bottom: 1px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em;">OUTPUT GENERATED</div>
+      <span class="time-badge active" id="timeBadge">Generated in 0s</span>
+    </div>
+    <div class="output-grid">
+      <div class="output-section">
+        <div class="output-label">Follow-Up Email</div>
+        <div class="output-text" id="emailOutput"></div>
+        <button class="copy-btn" onclick="copyText('emailOutput')">COPY EMAIL</button>
+      </div>
+      <div class="output-section">
+        <div class="output-label">CRM Deal Summary</div>
+        <div class="output-text" id="crmOutput"></div>
+        <button class="copy-btn" onclick="copyText('crmOutput')">COPY CRM SUMMARY</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="how-it-works">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">You paste your notes</div>
+      <div class="step-desc">Rough bullet points, stream of consciousness, voice memo transcript. Format does not matter. The messier the better.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">AI processes in seconds</div>
+      <div class="step-desc">The system reads your notes, extracts every key detail, and generates structured professional output calibrated to your context.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Review and send</div>
+      <div class="step-desc">Read the email, hit send. Paste the CRM summary into your system. The whole thing takes under two minutes from call end to logged deal.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const EXAMPLE_NOTES = `Call with Sarah Chen, VP Sales at Nexora (B2B SaaS, 35 employees, project management software)
+Date: Today, 30 min call
+
+Key points:
+- Team of 8 sales reps, each doing 4-5 demos per week
+- After each demo they spend 40-60 min writing follow-ups, updating Salesforce, sending proposal outlines
+- Sarah estimates 20-25% of selling time is lost to admin
+- Main objection: worried about data security, where does the call data go
+- Also mentioned budget cycle resets in September, wants something in place before Q4 push
+- Decision: Sarah + CTO (David Park) need to both sign off
+- She liked the demo, said it would "save us a ton of time"
+- Next step: she wants a 30 min call with David present, can do any day next week
+- Budget range she mentioned: somewhere between 5-15k for setup, fine with monthly fee after`;
+
+  function loadExample() {
+    document.getElementById('notesInput').value = EXAMPLE_NOTES;
+    document.getElementById('notesInput').focus();
+  }
+
+  async function generateOutput() {
+    const notes = document.getElementById('notesInput').value.trim();
+    
+    if (!notes) {
+      showError('Please paste your call notes before generating.');
+      return;
+    }
+
+    if (notes.length < 30) {
+      showError('Notes are too short. Add more detail for better output.');
+      return;
+    }
+
+    hideError();
+    setLoading(true);
+    
+    const startTime = Date.now();
+
+    const prompt = `You are an expert sales assistant for a B2B consulting firm. A sales rep has just finished a call and given you rough notes. Your job is to produce two things:
+
+1. FOLLOW-UP EMAIL: A professional, personalized follow-up email to the prospect. It should reference specific details from the call, confirm next steps, and sound like a senior sales professional wrote it. Natural tone, direct, no corporate fluff, no em dashes anywhere.
+
+2. CRM DEAL SUMMARY: A structured deal record with these fields:
+- Deal Name
+- Stage
+- Close Probability (%)
+- Estimated Deal Value
+- Primary Contact (name, title, email if mentioned)
+- Additional Stakeholders
+- Pain Points (specific, from the call)
+- Objections Raised
+- Next Steps
+- Rep Notes
+
+Format your response EXACTLY like this, with these exact headers:
+
+FOLLOW-UP EMAIL:
+[the email here, including Subject line]
+
+CRM DEAL SUMMARY:
+[the structured summary here]
+
+Here are the call notes:
+${notes}`;
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+
+      if (data.content && data.content[0]) {
+        const fullText = data.content[0].text;
+        parseAndDisplay(fullText, elapsed);
+      } else {
+        showError('Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      showError('Connection error. Please check your internet and try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function parseAndDisplay(text, elapsed) {
+    let emailPart = '';
+    let crmPart = '';
+
+    const emailMatch = text.match(/FOLLOW-UP EMAIL:\s*([\s\S]*?)(?=CRM DEAL SUMMARY:|$)/i);
+    const crmMatch = text.match(/CRM DEAL SUMMARY:\s*([\s\S]*?)$/i);
+
+    if (emailMatch) emailPart = emailMatch[1].trim();
+    if (crmMatch) crmPart = crmMatch[1].trim();
+
+    if (!emailPart && !crmPart) {
+      const half = Math.floor(text.length / 2);
+      emailPart = text.substring(0, half).trim();
+      crmPart = text.substring(half).trim();
+    }
+
+    document.getElementById('emailOutput').textContent = emailPart || text;
+    document.getElementById('crmOutput').textContent = crmPart || 'CRM summary included above.';
+    document.getElementById('timeBadge').textContent = `Generated in ${elapsed}s`;
+    
+    document.getElementById('outputSuccess').classList.add('active');
+    document.getElementById('outputSuccess').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function setLoading(state) {
+    const btn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const loading = document.getElementById('loadingState');
+
+    if (state) {
+      btn.disabled = true;
+      btnText.textContent = 'Processing...';
+      loading.classList.add('active');
+      document.getElementById('outputSuccess').classList.remove('active');
+    } else {
+      btn.disabled = false;
+      btnText.textContent = 'Generate Follow-Up + CRM Summary';
+      loading.classList.remove('active');
+    }
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('errorBox');
+    box.textContent = msg;
+    box.classList.add('active');
+  }
+
+  function hideError() {
+    document.getElementById('errorBox').classList.remove('active');
+  }
+
+  function copyText(id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      const original = btn.textContent;
+      btn.textContent = 'COPIED';
+      btn.style.borderColor = 'var(--green)';
+      btn.style.color = 'var(--green)';
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
