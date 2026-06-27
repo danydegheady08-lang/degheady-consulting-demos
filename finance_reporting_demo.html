@@ -413,13 +413,10 @@ Raw financial data:
 ${data}`;
 
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch("https://anthropic-proxy.degheady.workers.dev", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": "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",
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-allow-browser": "true"
       },
       body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
     });
