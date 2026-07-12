@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Reporting AI: Degheady Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --navy:#0B1D33; --navy-deep:#071426;
+    --cream:#F5F1E8; --cream-dim:#EAE4D4;
+    --gold:#A8823E; --gold-bright:#C9A153;
+    --ink:#1A2332; --ink-soft:#4B5563;
+    --line:rgba(11,29,51,0.12); --line-on-navy:rgba(245,241,232,0.12);
+    --red:#8A3B3B; --sage:#4F6B4A;
+  }
+  body{background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;}
+
+  nav{
+    padding:18px 48px;display:flex;align-items:center;justify-content:space-between;
+    background:var(--navy);border-bottom:2px solid var(--gold-bright);
+    position:sticky;top:0;z-index:100;
+  }
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:0.06em;color:var(--cream);}
+  .nav-badge{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-bright);}
+
+  .hero{padding:72px 48px 56px;max-width:1080px;margin:0 auto;}
+  .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+  .hero-headline{
+    font-family:'Cormorant Garamond',serif;font-weight:500;
+    font-size:clamp(36px,5.4vw,58px);line-height:1.1;color:var(--navy);
+    margin-bottom:22px;max-width:680px;letter-spacing:-0.01em;
+  }
+  .hero-headline em{font-style:italic;color:var(--gold);}
+  .hero-sub{font-size:15px;color:var(--ink-soft);max-width:480px;line-height:1.65;}
+
+  .stats-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin:0 48px 56px;max-width:calc(1080px - 96px);margin-left:auto;margin-right:auto;
+  }
+  .stat{padding:26px 24px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:38px;color:var(--navy);line-height:1;margin-bottom:6px;}
+  .stat-num span{color:var(--gold);}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);letter-spacing:0.03em;}
+
+  .tool-wrap{max-width:1080px;margin:0 auto;padding:0 48px 90px;}
+
+  .panel{
+    background:#fff;border-radius:6px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 1px 2px rgba(11,29,51,0.06), 0 12px 32px rgba(11,29,51,0.08);
+  }
+  .section-label{
+    padding:14px 28px;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);
+    display:flex;justify-content:space-between;border-bottom:1px solid var(--line);
+  }
+  .section-label span.dim{color:var(--ink-soft);font-weight:400;}
+
+  .input-body{padding:22px 28px 20px;}
+  .example-btn{
+    width:100%;background:var(--cream);border:1.5px dashed var(--line);
+    padding:13px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;
+    margin-bottom:16px;transition:border-color .15s,background .15s;text-align:left;
+  }
+  .example-btn:hover{border-color:var(--gold);background:var(--cream-dim);}
+  .example-btn-icon{width:26px;height:26px;background:var(--navy);color:var(--gold-bright);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+  .example-btn-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+  .example-btn-text{font-size:12px;color:var(--ink-soft);}
+
+  textarea{
+    width:100%;min-height:220px;border:1px solid var(--line);border-radius:4px;
+    background:var(--cream);padding:16px;font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;line-height:1.7;color:var(--ink);resize:vertical;outline:none;
+    transition:border-color .15s;
+  }
+  textarea:focus{border-color:var(--gold);background:#fff;}
+  textarea::placeholder{color:var(--ink-soft);opacity:0.7;}
+
+  .input-actions{padding:16px 28px 8px;}
+  .btn{
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;padding:11px 20px;
+    border-radius:4px;border:1px solid var(--navy);background:var(--navy);color:var(--cream);
+    cursor:pointer;letter-spacing:0.02em;
+  }
+  .btn.ghost{background:transparent;color:var(--navy);}
+  .btn.gold{background:var(--gold-bright);border-color:var(--gold-bright);color:var(--navy-deep);}
+  .btn.ghost-dark{background:transparent;border-color:rgba(245,241,232,0.3);color:var(--cream);}
+  .btn.block{width:100%;justify-content:center;display:flex;align-items:center;gap:8px;padding:13px 20px;font-size:13px;}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+  .loading-bar{height:2px;background:var(--line);overflow:hidden;display:none;margin:14px 28px 0;}
+  .loading-bar.active{display:block;}
+  .loading-fill{height:100%;background:var(--gold-bright);animation:loadfill 1.4s ease-in-out infinite;}
+  @keyframes loadfill{0%{width:0%;margin-left:0%;}50%{width:55%;margin-left:22%;}100%{width:0%;margin-left:100%;}}
+  .loading-text{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);padding:8px 28px 16px;display:none;}
+  .loading-text.active{display:block;}
+  .error-box{background:rgba(138,59,59,0.08);border-left:3px solid var(--red);padding:12px 16px;font-size:12.5px;color:var(--red);display:none;margin:14px 28px 4px;}
+  .error-box.active{display:block;}
+
+  .info-body{padding:20px 28px 26px;}
+  .info-item{padding:14px 0;border-bottom:1px solid var(--line);}
+  .info-item:last-of-type{border-bottom:none;}
+  .info-num{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--gold);margin-bottom:6px;}
+  .info-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--navy);margin-bottom:4px;}
+  .info-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.55;}
+  .why-box{background:var(--cream);border-left:3px solid var(--gold);padding:15px 17px;margin-top:18px;}
+  .why-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .why-text{font-size:12.5px;color:var(--ink);line-height:1.55;}
+
+  .output-section{display:none;}
+  .output-section.active{display:block;}
+
+  .report-head{padding:24px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:20px;}
+  .report-company{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--navy);}
+  .report-period{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:4px;letter-spacing:0.02em;}
+  .report-badge{text-align:right;flex-shrink:0;}
+  .report-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);background:var(--cream-dim);padding:4px 10px;border-radius:2px;}
+  .report-time{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);margin-top:6px;}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-bottom:1px solid var(--line);}
+  .kpi-card{padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .kpi-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+  .kpi-value{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--navy);line-height:1;margin-bottom:8px;}
+  .kpi-delta{display:inline-flex;align-items:center;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:3px 8px;border-radius:2px;}
+  .kpi-delta.up{color:var(--sage);background:rgba(79,107,74,0.1);}
+  .kpi-delta.down{color:var(--red);background:rgba(138,59,59,0.1);}
+  .kpi-delta.flat{color:var(--ink-soft);background:var(--cream-dim);}
+
+  .report-section{padding:24px 28px;border-bottom:1px solid var(--line);}
+  .report-section:last-of-type{border-bottom:none;}
+  .report-section-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .summary-lead{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;
+    color:var(--navy);line-height:1.5;border-left:3px solid var(--gold);padding-left:18px;
+  }
+  .report-prose{font-size:14px;line-height:1.8;color:#2A3444;}
+  .report-prose p{margin:0 0 14px;}
+  .report-prose p:last-child{margin-bottom:0;}
+
+  .outlook-list{list-style:none;}
+  .outlook-list li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.55;color:var(--ink);}
+  .outlook-list li:last-child{border-bottom:none;}
+
+  .risks-list{list-style:none;}
+  .risks-list li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.55;color:var(--ink);}
+  .risks-list li:last-child{border-bottom:none;}
+  .risk-mark{width:16px;height:16px;flex-shrink:0;margin-top:2px;border-radius:50%;border:1.5px solid var(--red);position:relative;}
+  .risk-mark::before{content:"!";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--red);}
+
+  .trend-bars{display:flex;align-items:flex-end;gap:18px;height:140px;padding-top:10px;}
+  .trend-bar-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;flex:1;height:100%;}
+  .trend-bar-value{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-bottom:6px;}
+  .trend-bar-track{width:100%;max-width:56px;height:90px;display:flex;align-items:flex-end;background:var(--cream);border-radius:2px 2px 0 0;}
+  .trend-bar-fill{width:100%;background:linear-gradient(180deg,var(--gold-bright),var(--gold));border-radius:2px 2px 0 0;min-height:6px;}
+  .trend-bar-label{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-soft);margin-top:8px;text-align:center;}
+  .outlook-mark{width:16px;height:16px;flex-shrink:0;margin-top:2px;border-radius:3px;border:1.5px solid var(--gold);}
+
+  .report-actions{padding:16px 28px;display:flex;gap:10px;background:var(--cream-dim);}
+
+  .how{border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;}
+  .how-step{padding:32px 24px;border-right:1px solid var(--line);}
+  .how-step:last-child{border-right:none;}
+  .how-num{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--gold-bright);opacity:0.5;line-height:1;margin-bottom:12px;}
+  .how-title{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:7px;}
+  .how-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.6;}
+
+  @media(max-width:860px){
+    nav,.hero,.tool-wrap{padding-left:20px;padding-right:20px;}
+    .stats-row,.how{grid-template-columns:1fr;}
+    .stats-row{margin-left:20px;margin-right:20px;}
+    .stat{border-right:none;border-bottom:1px solid var(--line);}
+    .how-step{border-right:none;border-bottom:1px solid var(--line);}
+    .kpi-card{border-right:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Degheady Consulting</div>
+  <div class="nav-badge">Financial Reporting AI</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Financial Reporting AI</div>
+  <h1 class="hero-headline">Raw numbers in. <em>Board-ready report</em> in seconds.</h1>
+  <p class="hero-sub">Paste your raw monthly financial data. Get a complete executive summary with performance analysis, variance commentary, and outlook. Every month.</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat"><div class="stat-num">&lt;<span>60</span>s</div><div class="stat-label">Average processing time</div></div>
+  <div class="stat"><div class="stat-num"><span>4</span>hrs</div><div class="stat-label">Saved per monthly report</div></div>
+  <div class="stat"><div class="stat-num"><span>Board</span></div><div class="stat-label">Ready output quality</div></div>
+</div>
+
+<div class="tool-wrap">
+  <div class="panel">
+
+    <div class="section-label">Financial data <span class="dim">Input</span></div>
+    <div class="input-body">
+      <button class="example-btn" onclick="loadExample()">
+        <div class="example-btn-icon">&#9654;</div>
+        <div>
+          <div class="example-btn-title">Load example</div>
+          <div class="example-btn-text">See a real financial dataset in action</div>
+        </div>
+      </button>
+      <textarea id="dataInput" placeholder="Paste your raw financial data here. Any format. Numbers from a spreadsheet, accounting software, or typed out.
+
+Example:
+Company: Nexora SaaS
+Period: May 2026
+Revenue: 285,000 EUR
+Last month: 241,000 EUR
+Costs: 198,000 EUR
+Headcount: 23
+New clients: 4
+Churned clients: 1"></textarea>
+    </div>
+    <div class="input-actions">
+      <button class="btn block" onclick="generateReport()" id="generateBtn">
+        <span id="btnText">Generate financial report</span>
+      </button>
+    </div>
+    <div class="loading-bar" id="loadingBar"><div class="loading-fill"></div></div>
+    <div class="loading-text" id="loadingText">Analyzing your data...</div>
+    <div class="error-box" id="errorBox"></div>
+
+    <div id="infoSection">
+      <div class="section-label">What you get <span class="dim">Output</span></div>
+      <div class="info-body">
+        <div class="info-item">
+          <div class="info-num">01</div>
+          <div class="info-title">Executive summary</div>
+          <div class="info-desc">A concise narrative overview of the month. Written for board-level readers. Clear, direct, no jargon.</div>
+        </div>
+        <div class="info-item">
+          <div class="info-num">02</div>
+          <div class="info-title">Key metrics and variance</div>
+          <div class="info-desc">Revenue, costs, margins, and ratios compared to prior period. Variance explained in plain language, not just percentages.</div>
+        </div>
+        <div class="info-item">
+          <div class="info-num">03</div>
+          <div class="info-title">Outlook and recommendations</div>
+          <div class="info-desc">Forward-looking commentary based on current trends. What to watch, what to act on, what the data suggests for next month.</div>
+        </div>
+        <div class="why-box">
+          <div class="why-label">Why it matters</div>
+          <div class="why-text">Finance managers spend 3 to 5 hours building monthly reports manually. This tool produces the same output in under a minute from whatever data you already have.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="outputSection" class="output-section">
+      <div class="section-label">Financial report <span class="dim">Ready to share</span></div>
+      <div class="report-head">
+        <div>
+          <div class="report-company" id="reportCompany">Financial Report</div>
+          <div class="report-period" id="reportPeriod"></div>
+        </div>
+        <div class="report-badge">
+          <div class="report-tag">Board ready</div>
+          <div class="report-time" id="timeBadge"></div>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpiGrid"></div>
+
+      <div class="report-section" id="trendSection" style="display:none;">
+        <div class="report-section-title">Revenue trend</div>
+        <div class="trend-bars" id="trendBars"></div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">Executive summary</div>
+        <div class="summary-lead" id="execSummary"></div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">Variance analysis</div>
+        <div class="report-prose" id="varianceText"></div>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">Key risks</div>
+        <ul class="risks-list" id="risksList"></ul>
+      </div>
+
+      <div class="report-section">
+        <div class="report-section-title">Outlook and recommendations</div>
+        <ul class="outlook-list" id="outlookList"></ul>
+      </div>
+
+      <div class="report-actions">
+        <button class="btn gold" onclick="copyReport('reportFull', this)">Copy report</button>
+        <button class="btn ghost">Export PDF</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="how">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <div class="how-title">Paste your raw data</div>
+      <div class="how-desc">Revenue, costs, headcount, KPIs. Any format. Copy straight from your spreadsheet or accounting software.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <div class="how-title">AI structures and analyzes</div>
+      <div class="how-desc">Numbers read, variances calculated, trends identified, narrative written in seconds.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <div class="how-title">Share with your board</div>
+      <div class="how-desc">Copy directly into your board deck or email. Formatted, professional, ready to present.</div>
+    </div>
+  </div>
+</div>
+
+<div id="reportFull" style="display:none;"></div>
+
+<script>
+const EXAMPLE = `Company: Nexora SaaS (B2B project management software, 28 employees)
+Period: May 2026
+
+REVENUE
+Total Revenue: 312,400 EUR
+Last Month (April): 278,900 EUR
+Same Month Last Year: 201,300 EUR
+MRR: 289,000 EUR
+New MRR: 34,500 EUR
+Churned MRR: 8,200 EUR
+Expansion MRR: 14,200 EUR
+
+COSTS
+Total Costs: 198,600 EUR
+Salaries and Benefits: 142,000 EUR
+Infrastructure and Tools: 18,400 EUR
+Sales and Marketing: 24,800 EUR
+General and Admin: 13,400 EUR
+
+KEY METRICS
+Gross Profit: 113,800 EUR
+Gross Margin: 36.4%
+Net Profit: 47,200 EUR
+Customer Count: 87 (up from 83)
+Churn Rate: 2.8%
+Average Contract Value: 3,620 EUR
+NPS: 61
+
+HEADCOUNT
+Total: 28
+New Hires: 2
+Open Roles: 3
+
+NOTES
+Strong month driven by enterprise upsells. Two large accounts expanded. Lost one mid-market client. Pipeline healthy going into Q3. Infrastructure costs increased due to AWS migration.`;
+
+function loadExample() {
+  document.getElementById('dataInput').value = EXAMPLE;
+}
+
+function esc(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+function splitBullets(str){
+  if(!str) return [];
+  return str.split(/\n/)
+    .map(function(l){ return l.trim(); })
+    .filter(function(l){ return /^[-*\u2022]\s+[A-Za-z0-9]/.test(l) || /^\d+[.)]\s+[A-Za-z0-9]/.test(l); })
+    .map(function(l){ return l.replace(/^[-*\u2022]\s+/,'').replace(/^\d+[.)]\s+/,'').trim(); });
+}
+
+function stripDividers(str){
+  if(!str) return '';
+  return str.split(/\n/).filter(function(l){ return !/^\s*[-*_]{3,}\s*$/.test(l); }).join('\n').trim();
+}
+
+function extractSections(text){
+  const headers = ['EXECUTIVE SUMMARY','KEY METRICS','REVENUE TREND','VARIANCE ANALYSIS','KEY RISKS','OUTLOOK AND RECOMMENDATIONS'];
+  const headerAlt = headers.join('|');
+  const re = new RegExp('(?:^|\\n)\\s*(?:[#*_\\s]{0,4}(?:\\d{1,2}[.)])?[#*_\\s]{0,4})(' + headerAlt + ')[#*_\\s]{0,4}:?\\s*(?:\\n|$)', 'gi');
+  const matches = Array.from(text.matchAll(re));
+  const sections = {};
+  for (let i = 0; i < matches.length; i++){
+    const name = matches[i][1].toUpperCase();
+    const start = matches[i].index + matches[i][0].length;
+    const end = (i + 1 < matches.length) ? matches[i+1].index : text.length;
+    sections[name] = text.slice(start, end).trim();
+  }
+  return sections;
+}
+
+function toParagraphs(str){
+  if(!str) return '';
+  return str.trim().split(/\n\s*\n/).map(function(p){ return '<p>' + esc(p).replace(/\n/g,'<br>') + '</p>'; }).join('');
+}
+
+function extractField(raw, label){
+  const re = new RegExp(label + '\\s*:\\s*(.+)', 'i');
+  const m = raw.match(re);
+  return m ? m[1].trim() : '';
+}
+
+async function generateReport() {
+  const data = document.getElementById('dataInput').value.trim();
+  if (!data || data.length < 30) { showError('Please add more financial data before generating.'); return; }
+
+  hideError();
+  setLoading(true);
+  document.getElementById('outputSection').classList.remove('active');
+
+  const start = Date.now();
+  const prompt = `You are a senior financial analyst preparing a board-ready executive summary. A finance manager has provided raw monthly financial data. Produce a professional, clear, and insightful financial report.
+
+Include these sections with these exact headers:
+
+1. EXECUTIVE SUMMARY
+3 to 4 sentence narrative overview of the month. Written for board-level readers. Highlight the most important story the numbers tell. No jargon. No em dashes.
+
+2. KEY METRICS
+List exactly 4 to 6 of the most important metrics. Each on its own line in exactly this format, nothing else on the line:
+Label: Value | Change
+Where Change is a short phrase like "up 12% vs last month" or "down 3% vs last month" or "flat vs last month". Pick metrics like revenue, gross margin, net profit, customer count, or churn depending on what is most relevant to the data provided.
+
+3. REVENUE TREND
+Only include consecutive, sequential periods leading up to the current period, for example the current month plus the 2 to 3 months immediately before it. Do not include a same month last year or year over year comparison in this list, that belongs in the narrative sections instead, not this sequential trend. Order strictly chronologically, oldest period first, regardless of what order the periods appear in the raw data. List each period on its own line in exactly this format, nothing else on the line:
+Period Label: Value
+Use plain numbers only in Value, no currency symbol, no commas, digits only, for example 201300 not 201,300 EUR. If fewer than 2 consecutive sequential periods of revenue data exist anywhere in the input, write exactly this and nothing else: No trend data available
+
+4. VARIANCE ANALYSIS
+2 to 3 short paragraphs in plain language. What drove revenue growth or decline. What caused cost increases or decreases. Be specific. No em dashes.
+
+5. KEY RISKS
+2 to 4 bullet points, each starting with a dash, identifying specific risks or watch items visible in the data. Distinct from recommendations, these are things that could go wrong, not actions to take.
+
+6. OUTLOOK AND RECOMMENDATIONS
+4 to 5 bullet points, each starting with a dash, practical and actionable, based on current data and trends.
+
+Write in a confident, professional tone. No hedging. No em dashes anywhere. State findings directly.
+
+Raw financial data:
+${data}`;
+
+  try {
+    const res = await fetch("https://anthropic-proxy.degheady.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1200, messages: [{ role: "user", content: prompt }] })
+    });
+
+    const resp = await res.json();
+    const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+
+    if (resp.content && resp.content[0] && resp.content[0].text) {
+      const text = resp.content[0].text;
+      document.getElementById('reportFull').textContent = text;
+
+      const sections = extractSections(text);
+      const summary = stripDividers(sections['EXECUTIVE SUMMARY'] || '');
+      const metricsRaw = stripDividers(sections['KEY METRICS'] || '');
+      const trendRaw = stripDividers(sections['REVENUE TREND'] || '');
+      const variance = stripDividers(sections['VARIANCE ANALYSIS'] || '');
+      const risksRaw = stripDividers(sections['KEY RISKS'] || '');
+      const outlookRaw = stripDividers(sections['OUTLOOK AND RECOMMENDATIONS'] || '');
+
+      document.getElementById('execSummary').innerHTML = esc(summary).replace(/\n/g,'<br>');
+      document.getElementById('varianceText').innerHTML = toParagraphs(variance);
+
+      const company = extractField(data, 'Company') || 'Financial report';
+      const period = extractField(data, 'Period');
+      document.getElementById('reportCompany').textContent = company.replace(/\s*\([^)]*\)\s*$/, '');
+      document.getElementById('reportPeriod').textContent = period ? 'Period: ' + period : '';
+      document.getElementById('timeBadge').textContent = 'Generated in ' + elapsed + 's';
+
+      const metricLines = metricsRaw.split(/\n/)
+        .map(function(l){ return l.replace(/^[-*\u2022]\s*/,'').trim(); })
+        .filter(function(l){ return l.includes(':') && l.includes('|') && l.length > 5; });
+      const kpiHtml = metricLines.map(function(line){
+        const parts = line.split('|');
+        const left = (parts[0] || '').trim();
+        const change = (parts[1] || '').trim();
+        const colonIdx = left.indexOf(':');
+        const label = colonIdx > -1 ? left.slice(0, colonIdx).trim() : left;
+        const value = colonIdx > -1 ? left.slice(colonIdx + 1).trim() : '';
+        let dirClass = 'flat';
+        if (/up|\+|grow|increas/i.test(change)) dirClass = 'up';
+        else if (/down|-|declin|drop|decreas/i.test(change)) dirClass = 'down';
+        const arrow = dirClass === 'up' ? '\u25B2' : dirClass === 'down' ? '\u25BC' : '\u2013';
+        return '<div class="kpi-card"><div class="kpi-label">' + esc(label) + '</div><div class="kpi-value">' + esc(value) + '</div><div class="kpi-delta ' + dirClass + '">' + arrow + ' ' + esc(change) + '</div></div>';
+      }).join('');
+      document.getElementById('kpiGrid').innerHTML = kpiHtml || '<div class="kpi-card"><div class="kpi-label">Metrics</div><div class="kpi-value">-</div></div>';
+
+      const trendLines = trendRaw.split(/\n/)
+        .map(function(l){ return l.replace(/^[-*\u2022]\s*/,'').trim(); })
+        .filter(function(l){ return l.includes(':') && !/no trend data/i.test(l); })
+        .filter(function(l){ return !/last year|year ago|yoy|y\/y/i.test(l); });
+      let trendPoints = trendLines.map(function(l){
+        const idx = l.indexOf(':');
+        const label = l.slice(0, idx).trim();
+        const raw = l.slice(idx + 1).trim();
+        const num = parseFloat(raw.replace(/[^0-9.\-]/g,''));
+        const parsedDate = Date.parse(label);
+        return { label: label, value: isNaN(num) ? 0 : num, dateVal: isNaN(parsedDate) ? null : parsedDate };
+      });
+      if (trendPoints.every(function(p){ return p.dateVal !== null; })) {
+        trendPoints = trendPoints.slice().sort(function(a, b){ return a.dateVal - b.dateVal; });
+      }
+      const trendSection = document.getElementById('trendSection');
+      if (trendPoints.length >= 2) {
+        const max = Math.max.apply(null, trendPoints.map(function(p){ return p.value; }));
+        const barsHtml = trendPoints.map(function(p){
+          const pct = max > 0 ? Math.max(6, Math.round((p.value / max) * 100)) : 6;
+          return '<div class="trend-bar-col">' +
+            '<div class="trend-bar-value">' + esc(p.value.toLocaleString()) + '</div>' +
+            '<div class="trend-bar-track"><div class="trend-bar-fill" style="height:' + pct + '%"></div></div>' +
+            '<div class="trend-bar-label">' + esc(p.label) + '</div>' +
+            '</div>';
+        }).join('');
+        document.getElementById('trendBars').innerHTML = barsHtml;
+        trendSection.style.display = 'block';
+      } else {
+        trendSection.style.display = 'none';
+      }
+
+      const outlookItems = splitBullets(outlookRaw);
+      document.getElementById('outlookList').innerHTML = outlookItems.map(function(o){ return '<li><span class="outlook-mark"></span>' + esc(o) + '</li>'; }).join('') || '<li><span class="outlook-mark"></span>No recommendations captured</li>';
+
+      const riskItems = splitBullets(risksRaw);
+      document.getElementById('risksList').innerHTML = riskItems.map(function(r){ return '<li><span class="risk-mark"></span>' + esc(r) + '</li>'; }).join('') || '<li><span class="risk-mark"></span>No specific risks flagged</li>';
+
+      document.getElementById('infoSection').style.display = 'none';
+      document.getElementById('outputSection').classList.add('active');
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      showError('Something went wrong. Please try again.');
+    }
+  } catch (e) {
+    showError('Connection error. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+}
+
+function setLoading(on) {
+  document.getElementById('generateBtn').disabled = on;
+  document.getElementById('btnText').textContent = on ? 'Generating...' : 'Generate financial report';
+  document.getElementById('loadingBar').classList.toggle('active', on);
+  document.getElementById('loadingText').classList.toggle('active', on);
+}
+
+function showError(msg) { const b = document.getElementById('errorBox'); b.textContent = msg; b.classList.add('active'); }
+function hideError() { document.getElementById('errorBox').classList.remove('active'); }
+
+function copyReport(id, btn) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(function(){
+    const orig = btn.textContent;
+    btn.textContent = 'Copied';
+    setTimeout(function(){ btn.textContent = orig; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
