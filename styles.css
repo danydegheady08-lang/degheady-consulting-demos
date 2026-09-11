@@ -764,6 +764,22 @@ h2 em { font-style: italic; color: var(--gold); }
 .form-select { color: rgba(250,248,243,0.35); cursor: pointer; }
 .form-select option { background: var(--navy-mid); color: var(--cream); }
 
+/* Light-background variant, used when the contact form sits on a white/cream page instead of navy */
+.form-on-light .form-label { color: var(--text-mid); }
+.form-on-light .form-input,
+.form-on-light .form-textarea,
+.form-on-light .form-select {
+  background: #fff;
+  border: 1px solid var(--rule);
+  color: var(--navy);
+}
+.form-on-light .form-input:focus,
+.form-on-light .form-textarea:focus,
+.form-on-light .form-select:focus { border-color: var(--gold); }
+.form-on-light .form-input::placeholder,
+.form-on-light .form-textarea::placeholder { color: #A8A49A; }
+.form-on-light .form-select { color: var(--text-mid); }
+
 .form-submit {
   background: var(--gold);
   color: var(--navy);
@@ -1040,17 +1056,3 @@ footer {
   .page-hero { padding: 150px 24px 60px; }
   .content-section { padding: 60px 24px; }
 }
-.form-on-light .form-label { color: #4A4840; }
-.form-on-light .form-input,
-.form-on-light .form-textarea,
-.form-on-light .form-select {
-  background: #fff;
-  border: 1px solid #DDD8CC;
-  color: #0D1B3E;
-}
-.form-on-light .form-input:focus,
-.form-on-light .form-textarea:focus,
-.form-on-light .form-select:focus { border-color: #C9A96E; }
-.form-on-light .form-input::placeholder,
-.form-on-light .form-textarea::placeholder { color: #A8A49A; }
-.form-on-light .form-select { color: #4A4840; }
