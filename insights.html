@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights | Degheady Consulting</title>
+<meta name="description" content="Real research on AI automation, sales tooling, and financial reporting. Grounded in actual market analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-label">Get in touch</div>
+    <h3>Book a consultation</h3>
+    <p>Tell us about your team and we will be in touch within 24 hours to arrange a 20-minute call.</p>
+    <form class="contact-form" id="modalForm" action="https://formspree.io/f/mlgygjop" method="POST">
+      <input type="hidden" name="_replyto" value="inquiries@degheady.com">
+      <input type="hidden" name="_subject" value="New consultation request — Degheady Consulting">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input type="text" name="first_name" class="form-input" placeholder="First name" required></div>
+        <div class="form-group"><label class="form-label">Last name</label><input type="text" name="last_name" class="form-input" placeholder="Last name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Company</label><input type="text" name="company" class="form-input" placeholder="Company name" required></div>
+        <div class="form-group"><label class="form-label">Email address</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service of interest</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service</option>
+          <option value="Sales Assistant">AI Sales Assistant</option>
+          <option value="Financial Reporting">Financial Reporting AI</option>
+          <option value="Both">Both Services</option>
+          <option value="Not sure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your team</label>
+        <textarea name="message" class="form-textarea" placeholder="Brief description of your team size, current workflow, and what you would like to automate..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send enquiry</button>
+      <div class="form-success" id="modalSuccess">Thank you. We will be in touch within 24 hours.</div>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1"/>
+        <rect x="9" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="1" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="9" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Degheady Consulting<span>AI Automation Advisory</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="approach.html" class="nav-link">Approach</a>
+    <a href="insights.html" class="nav-link active">Insights</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Book a consultation</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html" class="mobile-nav-link" onclick="closeMenu()">Services</a>
+  <a href="approach.html" class="mobile-nav-link" onclick="closeMenu()">Approach</a>
+  <a href="insights.html" class="mobile-nav-link" onclick="closeMenu()">Insights</a>
+  <a href="pricing.html" class="mobile-nav-link" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" class="mobile-nav-link" onclick="closeMenu()">About</a>
+  <a href="faq.html" class="mobile-nav-link" onclick="closeMenu()">FAQ</a>
+  <button class="mobile-nav-cta" onclick="closeMenu(); openModal()">Book a consultation</button>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Insights</div>
+    <div class="section-label">Insights</div>
+    <h1>Real thinking,<br>grounded in <em>actual research.</em></h1>
+    <p class="page-lede">Everything here comes from genuine market analysis, not content written to fill a page. If a claim is made, it's one we can defend.</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner wide">
+    <div class="insights-grid">
+
+      <a href="insight-ai-objection.html" class="insight-card">
+        <div class="insight-card-head"><div class="cat">Sales &amp; AI</div><h3>"We Already Use AI For This" Isn't The Objection You Think It Is</h3></div>
+        <p>Capability was never the gap. Here is the actual reason most AI tools sit half-used inside growing teams, and what it means for how this gets sold.</p>
+        <span class="read-more">Read the piece →</span>
+      </a>
+
+      <a href="insight-meeting-tools-gap.html" class="insight-card">
+        <div class="insight-card-head"><div class="cat">Market Research</div><h3>The Real Gap In AI Meeting Tools, And Why It Isn't A Feature</h3></div>
+        <p>We mapped every major competitor in the AI meeting assistant category. They are all good at the same thing, and weak at the same other thing.</p>
+        <span class="read-more">Read the piece →</span>
+      </a>
+
+      <a href="insight-financial-reporting-gap.html" class="insight-card">
+        <div class="insight-card-head"><div class="cat">Market Research</div><h3>What Free Financial Reporting Tools Assume About You</h3></div>
+        <p>Every platform in this category is built for a company that has already outgrown spreadsheets. Most 10 to 50 person businesses have not, and that gap is the actual opportunity.</p>
+        <span class="read-more">Read the piece →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="next-page-cta">
+  <div class="section-label">Ready To Talk</div>
+  <h2>See what this looks like <em>for your team specifically.</em></h2>
+  <button class="btn-gold" onclick="openModal()">Book a consultation</button>
+</div>
+
+<footer>
+  <div class="footer-logo">Degheady Consulting</div>
+  <div class="footer-links">
+    <a href="services.html" class="footer-link">Services</a>
+    <a href="approach.html" class="footer-link">Approach</a>
+    <a href="insights.html" class="footer-link">Insights</a>
+    <a href="pricing.html" class="footer-link">Pricing</a>
+    <a href="about.html" class="footer-link">About</a>
+    <a href="faq.html" class="footer-link">FAQ</a>
+    <a href="contact.html" class="footer-link">Contact</a>
+    <a href="mailto:inquiries@degheady.com" class="footer-link">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Degheady Consulting. Berlin, Germany.</div>
+</footer>
+
+<script>
+function openModal() { document.getElementById('contactModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('contactModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); }
+document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+async function handleForm(formId, successId) {
+  const form = document.getElementById(formId);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.reset(); document.getElementById(successId).classList.add('active'); btn.textContent = 'Sent'; }
+    else { btn.textContent = 'Try again'; btn.disabled = false; }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
+document.getElementById('modalForm').addEventListener('submit', function(e) { e.preventDefault(); handleForm('modalForm', 'modalSuccess'); });
+</script>
+</body></html>

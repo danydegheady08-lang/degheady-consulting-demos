@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Approach | Degheady Consulting</title>
+<meta name="description" content="From first call to live system in a week. The real setup and retainer process behind every engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-label">Get in touch</div>
+    <h3>Book a consultation</h3>
+    <p>Tell us about your team and we will be in touch within 24 hours to arrange a 20-minute call.</p>
+    <form class="contact-form" id="modalForm" action="https://formspree.io/f/mlgygjop" method="POST">
+      <input type="hidden" name="_replyto" value="inquiries@degheady.com">
+      <input type="hidden" name="_subject" value="New consultation request — Degheady Consulting">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input type="text" name="first_name" class="form-input" placeholder="First name" required></div>
+        <div class="form-group"><label class="form-label">Last name</label><input type="text" name="last_name" class="form-input" placeholder="Last name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Company</label><input type="text" name="company" class="form-input" placeholder="Company name" required></div>
+        <div class="form-group"><label class="form-label">Email address</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service of interest</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service</option>
+          <option value="Sales Assistant">AI Sales Assistant</option>
+          <option value="Financial Reporting">Financial Reporting AI</option>
+          <option value="Both">Both Services</option>
+          <option value="Not sure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your team</label>
+        <textarea name="message" class="form-textarea" placeholder="Brief description of your team size, current workflow, and what you would like to automate..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send enquiry</button>
+      <div class="form-success" id="modalSuccess">Thank you. We will be in touch within 24 hours.</div>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1"/>
+        <rect x="9" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="1" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="9" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Degheady Consulting<span>AI Automation Advisory</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="approach.html" class="nav-link active">Approach</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Book a consultation</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html" class="mobile-nav-link" onclick="closeMenu()">Services</a>
+  <a href="approach.html" class="mobile-nav-link" onclick="closeMenu()">Approach</a>
+  <a href="insights.html" class="mobile-nav-link" onclick="closeMenu()">Insights</a>
+  <a href="pricing.html" class="mobile-nav-link" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" class="mobile-nav-link" onclick="closeMenu()">About</a>
+  <a href="faq.html" class="mobile-nav-link" onclick="closeMenu()">FAQ</a>
+  <button class="mobile-nav-cta" onclick="closeMenu(); openModal()">Book a consultation</button>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Approach</div>
+    <div class="section-label">How We Work</div>
+    <h1>From first call<br>to <em>live system, in a week.</em></h1>
+    <p class="page-lede">No lengthy discovery process, no six-week implementation. Every engagement follows the same real sequence, built for speed without skipping the part that actually matters, understanding how your team works before we build anything.</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <div class="section-label">The Process</div>
+    <h2>Two phases.<br><em>One relationship.</em></h2>
+    <p class="lede">Every engagement has a setup phase, where the system gets built and tested, and a retainer phase, where we keep it running and improve it. Here's exactly what happens in each.</p>
+
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="step-num">Step 1</div>
+        <h3>A 20-minute consultation call</h3>
+        <p>We ask about your current workflow, how follow-ups and reporting actually happen today, what tools you use, and where the real friction is. No pitch deck, just questions, because the answer to whether this is a fit depends entirely on your specific situation, not a generic pain point.</p>
+        <span class="step-phase">Before Setup</span>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">Step 2</div>
+        <h3>Workflow mapping</h3>
+        <p>We map your actual process end to end, which CRM fields matter, what a good follow-up looks like for your team specifically, what your board actually wants to see in a report. This is the step most tools skip entirely, and it's the reason a generic template usually falls short.</p>
+        <span class="step-phase">Setup, Week 1</span>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">Step 3</div>
+        <h3>Build and configure</h3>
+        <p>The system gets built against your actual CRM or data source, not a demo environment. Tone, format, and logic are configured specifically to what we learned in the mapping step, not left as generic defaults you'd have to adjust yourself.</p>
+        <span class="step-phase">Setup, Week 1</span>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">Step 4</div>
+        <h3>Testing against real data</h3>
+        <p>Before anything goes live, it's tested against real calls or real financial data from your business, not synthetic examples. You review the actual output before the system touches anything your team relies on.</p>
+        <span class="step-phase">Setup, Week 1</span>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">Step 5</div>
+        <h3>Launch</h3>
+        <p>The system goes live. Your team starts using it immediately, typically within a week of that first call, not a month of back-and-forth implementation.</p>
+        <span class="step-phase">End of Setup</span>
+      </div>
+      <div class="timeline-step">
+        <div class="step-num">Step 6</div>
+        <h3>Ongoing operation</h3>
+        <p>We monitor it, fix anything that breaks, and refine it as your team's needs shift. Monthly check-ins keep it aligned with how your business is actually evolving, not frozen at how it worked on day one.</p>
+        <span class="step-phase">Retainer, Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section alt">
+  <div class="content-inner">
+    <div class="section-label">The Principle Underneath</div>
+    <h2>Someone has to be<br><em>accountable when it breaks.</em></h2>
+    <p class="lede">This is the actual difference between what we build and a self-serve tool your team configures alone.</p>
+
+    <div class="about-principle">
+      <div class="num">01</div>
+      <div><h4>You never touch a configuration panel</h4><p>Every adjustment, every tweak, every fix runs through us. You describe what changed in your business, we handle the rest.</p></div>
+    </div>
+    <div class="about-principle">
+      <div class="num">02</div>
+      <div><h4>Nothing ships untested against your real data</h4><p>We don't hand you something built for a hypothetical company and hope it fits. It's tested against your actual calls, your actual numbers, before it touches anything live.</p></div>
+    </div>
+    <div class="about-principle">
+      <div class="num">03</div>
+      <div><h4>One point of contact, always</h4><p>Not a support ticket queue. If something's not working, you reach the person who built it, directly.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="next-page-cta">
+  <div class="section-label">Next</div>
+  <h2>See exactly what it <em>costs to work this way.</em></h2>
+  <a href="pricing.html" class="btn-gold">View Pricing</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Degheady Consulting</div>
+  <div class="footer-links">
+    <a href="services.html" class="footer-link">Services</a>
+    <a href="approach.html" class="footer-link">Approach</a>
+    <a href="insights.html" class="footer-link">Insights</a>
+    <a href="pricing.html" class="footer-link">Pricing</a>
+    <a href="about.html" class="footer-link">About</a>
+    <a href="faq.html" class="footer-link">FAQ</a>
+    <a href="contact.html" class="footer-link">Contact</a>
+    <a href="mailto:inquiries@degheady.com" class="footer-link">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Degheady Consulting. Berlin, Germany.</div>
+</footer>
+
+<script>
+function openModal() { document.getElementById('contactModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('contactModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); }
+document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+async function handleForm(formId, successId) {
+  const form = document.getElementById(formId);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.reset(); document.getElementById(successId).classList.add('active'); btn.textContent = 'Sent'; }
+    else { btn.textContent = 'Try again'; btn.disabled = false; }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
+document.getElementById('modalForm').addEventListener('submit', function(e) { e.preventDefault(); handleForm('modalForm', 'modalSuccess'); });
+</script>
+</body></html>

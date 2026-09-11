@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Degheady Consulting</title>
+<meta name="description" content="AI Sales Assistant and Financial Reporting AI, built around your team, delivered with full accountability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-label">Get in touch</div>
+    <h3>Book a consultation</h3>
+    <p>Tell us about your team and we will be in touch within 24 hours to arrange a 20-minute call.</p>
+    <form class="contact-form" id="modalForm" action="https://formspree.io/f/mlgygjop" method="POST">
+      <input type="hidden" name="_replyto" value="inquiries@degheady.com">
+      <input type="hidden" name="_subject" value="New consultation request — Degheady Consulting">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input type="text" name="first_name" class="form-input" placeholder="First name" required></div>
+        <div class="form-group"><label class="form-label">Last name</label><input type="text" name="last_name" class="form-input" placeholder="Last name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Company</label><input type="text" name="company" class="form-input" placeholder="Company name" required></div>
+        <div class="form-group"><label class="form-label">Email address</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service of interest</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service</option>
+          <option value="Sales Assistant">AI Sales Assistant</option>
+          <option value="Financial Reporting">Financial Reporting AI</option>
+          <option value="Both">Both Services</option>
+          <option value="Not sure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your team</label>
+        <textarea name="message" class="form-textarea" placeholder="Brief description of your team size, current workflow, and what you would like to automate..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send enquiry</button>
+      <div class="form-success" id="modalSuccess">Thank you. We will be in touch within 24 hours.</div>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1"/>
+        <rect x="9" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="1" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="9" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Degheady Consulting<span>AI Automation Advisory</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-link active">Services</a>
+    <a href="approach.html" class="nav-link">Approach</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Book a consultation</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html" class="mobile-nav-link" onclick="closeMenu()">Services</a>
+  <a href="approach.html" class="mobile-nav-link" onclick="closeMenu()">Approach</a>
+  <a href="insights.html" class="mobile-nav-link" onclick="closeMenu()">Insights</a>
+  <a href="pricing.html" class="mobile-nav-link" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" class="mobile-nav-link" onclick="closeMenu()">About</a>
+  <a href="faq.html" class="mobile-nav-link" onclick="closeMenu()">FAQ</a>
+  <button class="mobile-nav-cta" onclick="closeMenu(); openModal()">Book a consultation</button>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Services</div>
+    <div class="section-label">What We Build</div>
+    <h1>Two systems.<br>Built <em>around how you already work.</em></h1>
+    <p class="page-lede">Not off-the-shelf software you configure yourself. Every deployment is built around your actual CRM, your actual reporting format, and your actual team, then run by us for as long as you need it running.</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner wide">
+
+    <div class="service-block">
+      <div class="service-head">
+        <div>
+          <div class="roman">I.</div>
+          <h2>AI Sales Assistant</h2>
+        </div>
+        <div class="service-tag">Follow-Up &amp; CRM Automation</div>
+      </div>
+      <p class="lede">Converts raw post-call notes into a ready-to-send follow-up email and a complete, structured CRM deal summary. The rep spends the time they used to lose to admin actually selling instead.</p>
+
+      <h3 class="section" style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:19px; color:var(--navy); margin:36px 0 14px;">The problem this solves</h3>
+      <p style="max-width:700px; color:var(--text-mid); font-size:14.5px; line-height:1.8;">A rep finishes a call and now owes two things: a follow-up email that actually references what was discussed, and a CRM entry that's accurate enough for the next person to pick up the deal cold. Most reps do one of those well and rush the other, or delay both until end of day, by which point the moment that made the follow-up compelling has already passed. Multiply that by every call, every rep, every day, and it's a genuine tax on selling time, not a minor inconvenience.</p>
+
+      <div class="service-grid">
+        <div class="service-col">
+          <h4>What's Included</h4>
+          <ul>
+            <li><b>Follow-up generation</b> — a specific, referenced email drafted within seconds of the call ending, not a template with names swapped in</li>
+            <li><b>CRM deal summary</b> — structured fields populated automatically: deal stage, next steps, key concerns raised, decision-maker identified</li>
+            <li><b>Tone matching</b> — configured to sound like your team, not like an obviously automated message</li>
+            <li><b>Deal risk flagging</b> — calls out when a deal shows signs of stalling based on language used</li>
+          </ul>
+        </div>
+        <div class="service-col">
+          <h4>Who It's Built For</h4>
+          <ul>
+            <li>B2B sales teams doing 4 or more calls per rep, per day</li>
+            <li>Recruitment agencies managing high call volume with candidates and clients</li>
+            <li>Teams where follow-up speed is a known factor in win rate</li>
+            <li>Any team currently relying on a rep's memory and end-of-day admin time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <div class="service-head">
+        <div>
+          <div class="roman">II.</div>
+          <h2>Financial Reporting AI</h2>
+        </div>
+        <div class="service-tag">Board-Ready Reporting</div>
+      </div>
+      <p class="lede">Converts raw financial data into a board-ready executive report every single month, consistent formatting, real variance analysis, forward-looking commentary, regardless of who is available to build it that week.</p>
+
+      <h3 class="section" style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:19px; color:var(--navy); margin:36px 0 14px;">The problem this solves</h3>
+      <p style="max-width:700px; color:var(--text-mid); font-size:14.5px; line-height:1.8;">Most 10 to 50 person companies don't have a dedicated FP&amp;A function. Reporting falls to whoever has the least on their plate that month, built from scratch in a spreadsheet, with commentary written under time pressure right before a board meeting. The report's quality becomes a function of who happened to build it, not a reliable, repeatable standard. That inconsistency is the actual risk, not the hours spent, though those add up too.</p>
+
+      <div class="service-grid">
+        <div class="service-col">
+          <h4>What's Included</h4>
+          <ul>
+            <li><b>Executive summary</b> — written in board-appropriate language, not raw data dumped into a template</li>
+            <li><b>KPI dashboard</b> — the metrics that actually matter for your business, not a generic template</li>
+            <li><b>Variance analysis</b> — month-over-month and against plan, with the actual drivers named</li>
+            <li><b>Forward-looking commentary</b> — a real read on trajectory, not just a restatement of history</li>
+          </ul>
+        </div>
+        <div class="service-col">
+          <h4>Who It's Built For</h4>
+          <ul>
+            <li>Founder-led companies without a dedicated finance hire yet</li>
+            <li>Teams reporting to a board or investors on a monthly or quarterly cycle</li>
+            <li>Finance managers spending 3 or more hours per cycle on manual report-building</li>
+            <li>Any team where report quality currently depends on who's available that month</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="content-section alt">
+  <div class="content-inner">
+    <div class="section-label">A Note On Demos</div>
+    <h2>We don't put a live tool<br><em>in front of a stranger.</em></h2>
+    <p class="lede">Every deployment is configured to a client's specific CRM and reporting format during setup, which means a generic public demo would either be misleading or genuinely broken depending on what you clicked. We'd rather show you the real thing, live, on a call, using your own data, where we can walk through exactly how it connects to your systems. That's not a sales tactic, it's the more honest way to demonstrate something that's built to be specific to you.</p>
+  </div>
+</section>
+
+<div class="next-page-cta">
+  <div class="section-label">Next</div>
+  <h2>See exactly how <em>delivery actually works.</em></h2>
+  <a href="approach.html" class="btn-gold">View Our Approach</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Degheady Consulting</div>
+  <div class="footer-links">
+    <a href="services.html" class="footer-link">Services</a>
+    <a href="approach.html" class="footer-link">Approach</a>
+    <a href="insights.html" class="footer-link">Insights</a>
+    <a href="pricing.html" class="footer-link">Pricing</a>
+    <a href="about.html" class="footer-link">About</a>
+    <a href="faq.html" class="footer-link">FAQ</a>
+    <a href="contact.html" class="footer-link">Contact</a>
+    <a href="mailto:inquiries@degheady.com" class="footer-link">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Degheady Consulting. Berlin, Germany.</div>
+</footer>
+
+<script>
+function openModal() { document.getElementById('contactModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('contactModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); }
+document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+async function handleForm(formId, successId) {
+  const form = document.getElementById(formId);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.reset(); document.getElementById(successId).classList.add('active'); btn.textContent = 'Sent'; }
+    else { btn.textContent = 'Try again'; btn.disabled = false; }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
+document.getElementById('modalForm').addEventListener('submit', function(e) { e.preventDefault(); handleForm('modalForm', 'modalSuccess'); });
+</script>
+</body></html>

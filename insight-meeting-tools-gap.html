@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Real Gap In AI Meeting Tools | Degheady Consulting</title>
+<meta name="description" content="A full competitive mapping of the AI meeting assistant category, and the structural gap none of the leaders address.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-label">Get in touch</div>
+    <h3>Book a consultation</h3>
+    <p>Tell us about your team and we will be in touch within 24 hours to arrange a 20-minute call.</p>
+    <form class="contact-form" id="modalForm" action="https://formspree.io/f/mlgygjop" method="POST">
+      <input type="hidden" name="_replyto" value="inquiries@degheady.com">
+      <input type="hidden" name="_subject" value="New consultation request — Degheady Consulting">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input type="text" name="first_name" class="form-input" placeholder="First name" required></div>
+        <div class="form-group"><label class="form-label">Last name</label><input type="text" name="last_name" class="form-input" placeholder="Last name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Company</label><input type="text" name="company" class="form-input" placeholder="Company name" required></div>
+        <div class="form-group"><label class="form-label">Email address</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service of interest</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service</option>
+          <option value="Sales Assistant">AI Sales Assistant</option>
+          <option value="Financial Reporting">Financial Reporting AI</option>
+          <option value="Both">Both Services</option>
+          <option value="Not sure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your team</label>
+        <textarea name="message" class="form-textarea" placeholder="Brief description of your team size, current workflow, and what you would like to automate..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send enquiry</button>
+      <div class="form-success" id="modalSuccess">Thank you. We will be in touch within 24 hours.</div>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1"/>
+        <rect x="9" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="1" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="9" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Degheady Consulting<span>AI Automation Advisory</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="approach.html" class="nav-link">Approach</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="about.html" class="nav-link">About</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Book a consultation</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html" class="mobile-nav-link" onclick="closeMenu()">Services</a>
+  <a href="approach.html" class="mobile-nav-link" onclick="closeMenu()">Approach</a>
+  <a href="insights.html" class="mobile-nav-link" onclick="closeMenu()">Insights</a>
+  <a href="pricing.html" class="mobile-nav-link" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" class="mobile-nav-link" onclick="closeMenu()">About</a>
+  <a href="faq.html" class="mobile-nav-link" onclick="closeMenu()">FAQ</a>
+  <button class="mobile-nav-cta" onclick="closeMenu(); openModal()">Book a consultation</button>
+</div>
+
+<div class="page-hero" style="padding-bottom:60px;">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="insights.html">Insights</a> / Article</div>
+    <div class="article-meta"><span>MARKET RESEARCH</span><span>·</span><span>7 MIN READ</span></div>
+    <h1 style="font-size:clamp(30px,4.2vw,50px);">The Real Gap In AI Meeting Tools,<br><em>And Why It Isn't A Feature.</em></h1>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="article-body">
+    <p>The category broadly called AI meeting assistants or conversation intelligence is crowded, competitive on price, and mature. A tool joins a sales call, transcribes it, generates a summary, and in the stronger products, pushes structured data into a CRM. Several leaders in this space have millions of users, and some of the strongest tools are free.</p>
+
+    <p>We mapped the real competitors in this category before building anything, because assuming a gap exists without checking is how a lot of automation businesses waste months. Here's what that research actually found.</p>
+
+    <h2>What the leaders already do well</h2>
+    <p>Fathom offers free, unlimited call recording, transcription, and AI summaries, with CRM sync on paid tiers starting around 16 euros a user per month. Fireflies.ai has the broadest CRM integration depth in the category, over 200 integrations, automatic field sync, starting at 10 dollars a user per month. Otter.ai, Gong, Avoma, Grain, and several others each do real, credible versions of the same core function. None of this is a gap. It's already solved, often for free.</p>
+
+    <h2>The pattern that actually matters</h2>
+    <p>Nearly every independent review of this market says a version of the same thing: these tools are good at transcription and summaries, and almost none of them are good at what happens after. Notes get generated. They sit there. The follow-through, the part that actually moves a deal forward or updates a CRM record correctly, is where the market consistently underdelivers, even among the strongest players.</p>
+
+    <blockquote>This is the actual opening. Not a missing feature. A missing layer of accountability.</blockquote>
+
+    <h2>Why this isn't a feature you can build your way into</h2>
+    <p>It would be a mistake to read this as "build a better follow-through feature" and try to out-engineer companies with real funding and real engineering teams. That's a race a solo operator loses. The actual gap is structural, not technical: every tool in this category is self-serve. The buyer evaluates it, signs up, configures the integration, and owns it when something breaks or drifts out of sync with how the team actually works. Nobody is accountable for the tool continuing to work correctly except the buyer themselves.</p>
+
+    <h2>What this means in practice</h2>
+    <p>A ten-person company doesn't want to evaluate six meeting-notetaker tools, pick one, configure the CRM integration correctly for their specific process, train their team on it, then troubleshoot it when it breaks. They want someone to hand them a working system and be accountable when it stops working. That's not a feature. It's a different category of relationship entirely, a managed outcome instead of a subscription to a platform, and it's the actual, defensible position available here.</p>
+  </div>
+</section>
+
+<div class="next-page-cta">
+  <div class="section-label">Related</div>
+  <h2>Read the <em>financial reporting research</em> too</h2>
+  <a href="insight-financial-reporting-gap.html" class="btn-gold">Read Next Article</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Degheady Consulting</div>
+  <div class="footer-links">
+    <a href="services.html" class="footer-link">Services</a>
+    <a href="approach.html" class="footer-link">Approach</a>
+    <a href="insights.html" class="footer-link">Insights</a>
+    <a href="pricing.html" class="footer-link">Pricing</a>
+    <a href="about.html" class="footer-link">About</a>
+    <a href="faq.html" class="footer-link">FAQ</a>
+    <a href="contact.html" class="footer-link">Contact</a>
+    <a href="mailto:inquiries@degheady.com" class="footer-link">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Degheady Consulting. Berlin, Germany.</div>
+</footer>
+
+<script>
+function openModal() { document.getElementById('contactModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('contactModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); }
+document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+async function handleForm(formId, successId) {
+  const form = document.getElementById(formId);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.reset(); document.getElementById(successId).classList.add('active'); btn.textContent = 'Sent'; }
+    else { btn.textContent = 'Try again'; btn.disabled = false; }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
+document.getElementById('modalForm').addEventListener('submit', function(e) { e.preventDefault(); handleForm('modalForm', 'modalSuccess'); });
+</script>
+</body></html>

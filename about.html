@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Degheady Consulting</title>
+<meta name="description" content="Degheady Consulting, built by a mechatronics engineer applying systems thinking to business automation. Berlin, Germany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-label">Get in touch</div>
+    <h3>Book a consultation</h3>
+    <p>Tell us about your team and we will be in touch within 24 hours to arrange a 20-minute call.</p>
+    <form class="contact-form" id="modalForm" action="https://formspree.io/f/mlgygjop" method="POST">
+      <input type="hidden" name="_replyto" value="inquiries@degheady.com">
+      <input type="hidden" name="_subject" value="New consultation request — Degheady Consulting">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First name</label><input type="text" name="first_name" class="form-input" placeholder="First name" required></div>
+        <div class="form-group"><label class="form-label">Last name</label><input type="text" name="last_name" class="form-input" placeholder="Last name" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Company</label><input type="text" name="company" class="form-input" placeholder="Company name" required></div>
+        <div class="form-group"><label class="form-label">Email address</label><input type="email" name="email" class="form-input" placeholder="you@company.com" required></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service of interest</label>
+        <select name="service" class="form-select">
+          <option value="">Select a service</option>
+          <option value="Sales Assistant">AI Sales Assistant</option>
+          <option value="Financial Reporting">Financial Reporting AI</option>
+          <option value="Both">Both Services</option>
+          <option value="Not sure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tell us about your team</label>
+        <textarea name="message" class="form-textarea" placeholder="Brief description of your team size, current workflow, and what you would like to automate..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send enquiry</button>
+      <div class="form-success" id="modalSuccess">Thank you. We will be in touch within 24 hours.</div>
+    </form>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1"/>
+        <rect x="9" y="1" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="1" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.4"/>
+        <rect x="9" y="9" width="6" height="6" stroke="#C9A96E" stroke-width="1" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Degheady Consulting<span>AI Automation Advisory</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="approach.html" class="nav-link">Approach</a>
+    <a href="insights.html" class="nav-link">Insights</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="about.html" class="nav-link active">About</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Book a consultation</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html" class="mobile-nav-link" onclick="closeMenu()">Services</a>
+  <a href="approach.html" class="mobile-nav-link" onclick="closeMenu()">Approach</a>
+  <a href="insights.html" class="mobile-nav-link" onclick="closeMenu()">Insights</a>
+  <a href="pricing.html" class="mobile-nav-link" onclick="closeMenu()">Pricing</a>
+  <a href="about.html" class="mobile-nav-link" onclick="closeMenu()">About</a>
+  <a href="faq.html" class="mobile-nav-link" onclick="closeMenu()">FAQ</a>
+  <button class="mobile-nav-cta" onclick="closeMenu(); openModal()">Book a consultation</button>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> / About</div>
+    <div class="section-label">About</div>
+    <h1>Built by one person<br>who reads systems<br><em>the way an engineer does.</em></h1>
+    <p class="page-lede">Degheady Consulting is not a large firm pretending to be small, or a small firm pretending to be large. It's a direct relationship with the person who builds and runs what you're paying for.</p>
+  </div>
+</div>
+
+<section class="content-section">
+  <div class="content-inner">
+    <div class="section-label">The Background</div>
+    <h2>Mechatronics, applied<br><em>to business systems.</em></h2>
+    <p class="lede">Dany Degheady is a mechatronics engineering student based in Berlin. Mechatronics trains you to treat mechanical, electrical, and software systems as one connected problem, not three separate disciplines handed off in sequence. That same instinct, that a system only works if every part of it is actually integrated, is the whole premise behind how Degheady Consulting builds automation: not a generic tool bolted on top of a workflow, but something configured to work with exactly how a team already operates.</p>
+    <p style="font-size:15px; color:var(--text-mid); line-height:1.8; max-width:700px;">Outside coursework, that same approach has gone into building and shipping production systems independently, researching target markets with real rigor, and holding AI-generated work to the same critical standard any engineer would apply to a system they're responsible for.</p>
+  </div>
+</section>
+
+<section class="content-section alt">
+  <div class="content-inner">
+    <div class="section-label">What We Actually Believe</div>
+    <h2>A few principles that<br><em>shape every engagement.</em></h2>
+
+    <div class="about-principle">
+      <div class="num">01</div>
+      <div><h4>The tool was never the hard part</h4><p>Most teams already have some AI capability available to them. What's usually missing isn't a better model, it's someone accountable for making sure it actually runs, correctly, every single time.</p></div>
+    </div>
+    <div class="about-principle">
+      <div class="num">02</div>
+      <div><h4>Generic tools are built for nobody in particular</h4><p>A price list, a feature set, a workflow built for an average company doesn't actually fit any real one. Everything here is configured to your specific situation, not adapted from a template.</p></div>
+    </div>
+    <div class="about-principle">
+      <div class="num">03</div>
+      <div><h4>Honesty scales better than polish</h4><p>If something doesn't work yet, we say so, plainly, rather than dress it up. That's true of what's on this site, and it's true of what happens on a call.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="content-inner">
+    <div class="section-label">Why Berlin</div>
+    <h2>Based where <em>the work happens.</em></h2>
+    <p class="lede">Degheady Consulting is based in Berlin, Germany, working with teams across Europe. English and French fluent, Arabic native, direct communication throughout, no account managers, no handoffs between the person who sold the engagement and the person delivering it.</p>
+  </div>
+</section>
+
+<div class="next-page-cta">
+  <div class="section-label">Next</div>
+  <h2>Read the research behind <em>how we position this.</em></h2>
+  <a href="insights.html" class="btn-gold">View Insights</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Degheady Consulting</div>
+  <div class="footer-links">
+    <a href="services.html" class="footer-link">Services</a>
+    <a href="approach.html" class="footer-link">Approach</a>
+    <a href="insights.html" class="footer-link">Insights</a>
+    <a href="pricing.html" class="footer-link">Pricing</a>
+    <a href="about.html" class="footer-link">About</a>
+    <a href="faq.html" class="footer-link">FAQ</a>
+    <a href="contact.html" class="footer-link">Contact</a>
+    <a href="mailto:inquiries@degheady.com" class="footer-link">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Degheady Consulting. Berlin, Germany.</div>
+</footer>
+
+<script>
+function openModal() { document.getElementById('contactModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('contactModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open'); }
+document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+async function handleForm(formId, successId) {
+  const form = document.getElementById(formId);
+  const btn = form.querySelector('.form-submit');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) { form.reset(); document.getElementById(successId).classList.add('active'); btn.textContent = 'Sent'; }
+    else { btn.textContent = 'Try again'; btn.disabled = false; }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
+document.getElementById('modalForm').addEventListener('submit', function(e) { e.preventDefault(); handleForm('modalForm', 'modalSuccess'); });
+</script>
+</body></html>
